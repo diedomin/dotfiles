@@ -1,0 +1,87 @@
+add_newline = false
+# Replace the "❯" symbol in the prompt with "➜"
+
+# Use custom format
+format = """$username$hostname$directory$git_branch$git_status$kubernetes
+[└─>](#a3be8c) """
+
+# Wait 10 milliseconds for starship to check files under the current directory.
+scan_timeout = 10
+
+[username]
+style_user = "#a3be8c"
+style_root = "red bold"
+format = " [$user]($style)"
+disabled = false
+show_always = true
+
+[hostname]
+ssh_only = false
+format = '@[$hostname](#a3be8c) '
+disabled = false
+
+[directory]
+format = "[$path]($style)[$read_only]($read_only_style) "
+style = "#d08770"
+read_only = "🔒"
+read_only_style = "red"
+
+[git_branch]
+format = "[$symbol$branch ]($style)"
+symbol = " "
+style = "#5e81ac"
+[git_status]
+format ='([\[$all_status$ahead_behind\]]($style))'
+conflicted = "="
+ahead = "⇡${count} "
+behind = "⇣${count} "
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+untracked = "?${count} "
+stashed = "$${count} "
+modified = "!${count} "
+staged = "+${count} "
+renamed = "»${count} "
+deleted = "✘${count} "
+style = "#5e81ac"
+disabled = false
+
+[git_state]
+rebase = "REBASING"
+merge = "MERGING"
+revert = "REVERTING"
+cherry_pick = "CHERRY-PICKING"
+bisect = "BISECTING"
+am = "AM"
+am_or_rebase = "AM/REBASE"
+style = "bold yellow"
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+disabled = false
+
+[kubernetes]
+format = '[🛟 $cluster\($namespace\)](#5e81ac) '
+disabled = false
+[kubernetes.context_aliases]
+'dev.local.cluster.k8s' = 'dev'
+'.*/openshift-cluster/.*' = 'openshift'
+'gke_.*_(?P<var_cluster>[\\w-]+)' = 'gke-$var_cluster'
+[kubernetes.user_aliases]
+'dev.local.cluster.k8s' = 'dev'
+'root/.*' = 'root'
+
+[hg_branch]
+symbol = " "
+style = "bold purple"
+format = "on [$symbol$branch]($style) "
+
+[status]
+format = "[$symbol$status]($style)"
+symbol = "✖"
+style = "bold red"
+disabled = true
+
+[php]
+symbol = " "
+
+[python]
+symbol = " "
+

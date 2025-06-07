@@ -1,0 +1,25 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "icon_theme": "Material Icon Theme",
+  "terminal": {
+    "font_family": "RobotoMono Nerd Font Mono",
+    "font_weight": 450,
+    "font_size": 18
+  },
+  "buffer_font_family": "RobotoMono Nerd Font Mono",
+  "buffer_font_size": 18,
+  "buffer_font_weight": 450,
+  "ui_font_size": 19,
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "Nordic"
+  }
+}
