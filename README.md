@@ -37,6 +37,7 @@ It is still under development; more tools and configurations will be added over 
 - Fedora (tested with recent versions)
 - Internet connection
 - [git](https://git-scm.com/)
+- [jq](https://jqlang.org/)
 
 ## Notes
 

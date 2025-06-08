@@ -16,38 +16,40 @@ done
 init_config
 
 # Update the system.
-echo "Actualizando el sistema..."
+echo "Updating the system..."
 sudo dnf upgrade --refresh -y
 
 # Install rpm packages.
-echo "Instalando paquetes RPM..."
+echo "Installing RPM packages..."
 sudo dnf install -y git vim curl wget fastfetch htop fish \
-    steam terminator ansible jq gnome-tweaks gnome-extensions-app \
+    steam terminator ansible gnome-tweaks gnome-extensions-app \
     gnome-shell-extension-appindicator
 
 # Install Flatpaks packages
-echo "Instalando paquetes Flatpak..."
+echo "Installing Flatpack packages..."
 flatpak install -y flathub one.ablaze.floorp com.discordapp.Discord \
     org.telegram.desktop com.bambulab.BambuStudio
 
 # Change default shell to fish
-echo "Cambiando la shell a Fish"
+echo "Changing the shell to Fish..."
 chsh -s $(which fish)
+fish
+exit
 
 # Install Zed editor
-echo "Instalando Zed..."
+echo "Installing Zed..."
 curl -fsSL https://zed.dev/install.sh | sh
 
 # Install OpenTofu
-echo "Instalando OpenTofu..."
+echo "Installing OpenTofu..."
 install_opentofu "$TOFU_VERSION"
 
 # Install Terragrunt
-echo "Instalando Terragrunt..."
+echo "Installing Terragrunt..."
 install_terragrunt "$TERRAGRUNT_VERSION"
 
 # Install Nerd fonts
-echo "Instalando NerdFonts..."
+echo "Installing NerdFonts..."
 mkdir -p ~/.local/share/fonts
 
 for font in $NERDFONTS; do
@@ -58,7 +60,7 @@ rm /tmp/*.zip
 fc-cache -fv
 
 # Install and config starship promt
-echo "Instalando Starship"
+echo "Installing Starship..."
 curl -sS https://starship.rs/install.sh | sh -s -- -y
 mkdir -p ~/.config
 cp ~/dotfiles/starship/starship.toml ~/.config/starship.toml
@@ -67,18 +69,18 @@ exit
 chmod 600 ~/.config/fish/config.fish ~/.config/starship.toml
 
 # Configure fish shell
-echo "Configurando fish..."
+echo "Configuring fish..."
 mkdir -p ~/.config/fish/functions
 cp ~/dotfiles/fish/config.fish ~/.config/fish/config.fish
 cp ~/dotfiles/fish/functions/* ~/.config/fish/functions/
 
 # Configure terminator
-echo "Configurando terminator..."
+echo "Configuring terminator..."
 mkdir -p ~/.config/terminator
 cp ~/dotfiles/terminator/config ~/.config/terminator/config
 
 # Configure zed
-echo "Configurando Zed..."
+echo "Configuring Zed..."
 mkdir -p ~/.config/zed
 cp -r ~/dotfiles/zed/* ~/.config/zed/
 
