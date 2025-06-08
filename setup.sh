@@ -30,6 +30,18 @@ echo "Installing Flatpack packages..."
 flatpak install -y flathub one.ablaze.floorp com.discordapp.Discord \
     org.telegram.desktop com.bambulab.BambuStudio
 
+# Install Docker
+install_docker
+
+# Install kubectl
+install_kubectl
+
+# Install Minikube
+install_minikube
+
+# Install Helm
+sudo dnf -y install helm
+
 # Change default shell to fish
 echo "Changing the shell to Fish..."
 chsh -s $(which fish)
