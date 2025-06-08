@@ -42,6 +42,9 @@ install_minikube
 # Install Helm
 sudo dnf -y install helm
 
+# Install Lens desktop
+install_lens
+
 # Change default shell to fish
 echo "Changing the shell to Fish..."
 chsh -s $(which fish)
