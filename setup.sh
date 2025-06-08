@@ -23,7 +23,7 @@ sudo dnf upgrade --refresh -y
 echo "Installing RPM packages..."
 sudo dnf install -y git vim curl wget fastfetch htop fish \
     steam terminator ansible gnome-tweaks gnome-extensions-app \
-    gnome-shell-extension-appindicator
+    gnome-shell-extension-appindicator hydrapaper
 
 # Install Flatpaks packages
 echo "Installing Flatpack packages..."
@@ -35,6 +35,12 @@ echo "Changing the shell to Fish..."
 chsh -s $(which fish)
 fish
 exit
+
+# Configure wallpapers
+cp ~/dotfiles/wallpapers/* ~/Pictures/Wallpapers/
+hydrapaper --cli \
+  "$HOME/Pictures/Wallpapers/jupiter.jpg" \
+  "$HOME/Pictures/Wallpapers/saturno.jpg"
 
 # Install Zed editor
 echo "Installing Zed..."
@@ -64,8 +70,6 @@ echo "Installing Starship..."
 curl -sS https://starship.rs/install.sh | sh -s -- -y
 mkdir -p ~/.config
 cp ~/dotfiles/starship/starship.toml ~/.config/starship.toml
-fish
-exit
 chmod 600 ~/.config/fish/config.fish ~/.config/starship.toml
 
 # Configure fish shell
