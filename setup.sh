@@ -9,13 +9,14 @@ NERDFONTS="Cousine MartianMono Mononoki RobotoMono"
 NERDFONTS_VERSION=$(curl -s https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest | jq -r .tag_name)
 
 # Functions source
-find "$FUNCTIONS_DIR" -type f -name "*.sh" | while read -r f; do
+for f in $(find "$FUNCTIONS_DIR" -type f -name "*.sh"); do
   source "$f"
 done
 
 init_config
 
 # Update the system.
+echo "Actualizando el sistema..."
 sudo dnf upgrade --refresh -y
 
 # Install rpm packages.
@@ -61,6 +62,8 @@ echo "Instalando Starship"
 curl -sS https://starship.rs/install.sh | sh -s -- -y
 mkdir -p ~/.config
 cp ~/dotfiles/starship/starship.toml ~/.config/starship.toml
+fish
+exit
 chmod 600 ~/.config/fish/config.fish ~/.config/starship.toml
 
 # Configure fish shell
