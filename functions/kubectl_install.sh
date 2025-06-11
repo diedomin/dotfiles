@@ -13,7 +13,7 @@ EOF
     sudo dnf install -y kubectl
 
     # Check installation
-    if kubectl version --client --short &>/dev/null; then
+    if kubectl version --client &>/dev/null; then
         echo "✔ kubectl installed correctly."
     else
         echo "❌ Error: kubectl did not install correctly."

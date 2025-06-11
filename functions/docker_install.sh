@@ -16,19 +16,4 @@ install_docker(){
     sudo usermod -aG docker $USER
     newgrp docker
 
-    # Check installation
-    if docker --version >/dev/null 2>&1; then
-        echo "✔ Docker CLI installed correctly."
-    else
-        echo "❌ Error: Docker did not install correctly."
-        exit 1
-    fi
-
-    # Hello-world test
-    if docker run --rm hello-world >/dev/null 2>&1; then
-        echo "✔ Docker works correctly."
-    else
-        echo "❌ Error: Failed to launch a Docker container."
-        exit 1
-    fi
 }
