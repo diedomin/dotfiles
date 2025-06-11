@@ -51,8 +51,7 @@ install_lens
 # Change default shell to fish
 echo "Changing the shell to Fish..."
 chsh -s $(which fish)
-fish
-exit
+fish -c "exit"
 
 # Configure wallpapers
 cp ~/dotfiles/wallpapers/* ~/Pictures/Wallpapers/
@@ -102,6 +101,9 @@ mkdir -p ~/.config/terminator
 cp ~/dotfiles/terminator/config ~/.config/terminator/config
 
 # Configure zed
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.profile
+fish -c "set -U fish_user_paths $HOME/.local/bin \$fish_user_paths"
+
 echo "Configuring Zed..."
 mkdir -p ~/.config/zed
 cp -r ~/dotfiles/zed/* ~/.config/zed/
