@@ -3,7 +3,7 @@
 install_docker(){
     # Install dependencies
     sudo dnf -y install dnf-plugins-core
-    sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+    sudo dnf-3 config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
 
     # Install Docker
     sudo dnf -y install docker-ce docker-ce-cli containerd.io \
