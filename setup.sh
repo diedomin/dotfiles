@@ -15,6 +15,9 @@ done
 
 init_config
 
+# Configure dnf
+configure_dnf
+
 # Update the system.
 echo "Updating the system..."
 sudo dnf upgrade --refresh -y
