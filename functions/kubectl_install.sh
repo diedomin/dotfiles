@@ -1,14 +1,14 @@
 #!/bin/bash
 
 install_kubectl(){
-    sudo tee /etc/yum.repos.d/kubernetes.repo > /dev/null <<EOF
-    [kubernetes]
-    name=Kubernetes
-    baseurl=https://pkgs.k8s.io/core:/stable:/v1.33/rpm/
-    enabled=1
-    gpgcheck=1
-    gpgkey=https://pkgs.k8s.io/core:/stable:/v1.33/rpm/repodata/repomd.xml.key
-    EOF
+sudo tee /etc/yum.repos.d/kubernetes.repo > /dev/null <<EOF
+[kubernetes]
+name=Kubernetes
+baseurl=https://pkgs.k8s.io/core:/stable:/v1.33/rpm/
+enabled=1
+gpgcheck=1
+gpgkey=https://pkgs.k8s.io/core:/stable:/v1.33/rpm/repodata/repomd.xml.key
+EOF
 
     sudo dnf install -y kubectl
 
