@@ -1,6 +1,12 @@
 #!/bin/bash
 set -e
 
+# Keep sudo alive
+sudo -v
+while true; do sudo -n true; sleep 60; done 2>/dev/null &
+SUDO_LOOP_PID=$!
+trap 'kill $SUDO_LOOP_PID' EXIT
+
 # Variables
 FUNCTIONS_DIR="./functions"
 TERRAGRUNT_VERSION="0.81.0"
