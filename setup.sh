@@ -15,6 +15,13 @@ done
 
 init_config
 
+# Set dark mode
+echo "Set Dark mode"
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+
+# Configure dnf
+configure_dnf
+
 # Update the system.
 echo "Updating the system..."
 sudo dnf upgrade --refresh -y
@@ -30,17 +37,32 @@ echo "Installing Flatpack packages..."
 flatpak install -y flathub one.ablaze.floorp com.discordapp.Discord \
     org.telegram.desktop com.bambulab.BambuStudio
 
+# Install Docker
+install_docker
+
+# Install kubectl
+install_kubectl
+
+# Install Minikube
+install_minikube
+
+# Install Helm
+sudo dnf -y install helm
+
+# Install Lens desktop
+install_lens
+
 # Change default shell to fish
 echo "Changing the shell to Fish..."
 chsh -s $(which fish)
-fish
-exit
+fish -c "exit"
 
 # Configure wallpapers
-cp ~/dotfiles/wallpapers/* ~/Pictures/Wallpapers/
+mkdir -p ~/Imágenes/Wallpapers
+cp ~/dotfiles/wallpapers/* ~/Imágenes/Wallpapers/
 hydrapaper --cli \
-  "$HOME/Pictures/Wallpapers/jupiter.jpg" \
-  "$HOME/Pictures/Wallpapers/saturno.jpg"
+  "$HOME/Imágenes/Wallpapers/jupiter.jpg" \
+  "$HOME/Imágenes/Wallpapers/saturno.jpg"
 
 # Install Zed editor
 echo "Installing Zed..."
@@ -69,8 +91,9 @@ fc-cache -fv
 echo "Installing Starship..."
 curl -sS https://starship.rs/install.sh | sh -s -- -y
 mkdir -p ~/.config
+mkdir -p ~/.config/fish
 cp ~/dotfiles/starship/starship.toml ~/.config/starship.toml
-chmod 600 ~/.config/fish/config.fish ~/.config/starship.toml
+chmod 600 ~/.config/starship.toml
 
 # Configure fish shell
 echo "Configuring fish..."
@@ -84,6 +107,9 @@ mkdir -p ~/.config/terminator
 cp ~/dotfiles/terminator/config ~/.config/terminator/config
 
 # Configure zed
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.profile
+fish -c "set -U fish_user_paths $HOME/.local/bin \$fish_user_paths"
+
 echo "Configuring Zed..."
 mkdir -p ~/.config/zed
 cp -r ~/dotfiles/zed/* ~/.config/zed/
