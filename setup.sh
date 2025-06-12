@@ -15,6 +15,10 @@ done
 
 init_config
 
+# Set dark mode
+echo "Set Dark mode"
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+
 # Configure dnf
 configure_dnf
 
