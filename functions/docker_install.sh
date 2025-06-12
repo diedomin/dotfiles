@@ -14,6 +14,5 @@ install_docker(){
 
     # Add $USER to docker group
     sudo usermod -aG docker $USER
-    newgrp docker
 
 }

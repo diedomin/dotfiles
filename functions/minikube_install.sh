@@ -3,7 +3,7 @@
 install_minikube(){
     # Download, install and remove the package.
   curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm
-  sudo rpm -Uvh minikube-latest.x86_64.rpm
+  sudo rpm -Uvh minikube-latest.x86_64.rpm || true
   rm -f minikube-latest.x86_64.rpm
 
   # Check installation

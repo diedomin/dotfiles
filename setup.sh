@@ -54,10 +54,11 @@ chsh -s $(which fish)
 fish -c "exit"
 
 # Configure wallpapers
-cp ~/dotfiles/wallpapers/* ~/Pictures/Wallpapers/
+mkdir -p ~/Imágenes/Wallpapers
+cp ~/dotfiles/wallpapers/* ~/Imágenes/Wallpapers/
 hydrapaper --cli \
-  "$HOME/Pictures/Wallpapers/jupiter.jpg" \
-  "$HOME/Pictures/Wallpapers/saturno.jpg"
+  "$HOME/Imágenes/Wallpapers/jupiter.jpg" \
+  "$HOME/Imágenes/Wallpapers/saturno.jpg"
 
 # Install Zed editor
 echo "Installing Zed..."
