@@ -14,6 +14,14 @@ TOFU_VERSION="1.9.1"
 NERDFONTS="Cousine MartianMono Mononoki RobotoMono"
 NERDFONTS_VERSION=$(curl -s https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest | jq -r .tag_name)
 
+RPM_PACKAGES=(git vim curl wget fastfetch htop fish steam
+   terminator ansible gnome-tweaks gnome-extensions-app
+   gnome-shell-extension-appindicator hydrapaper
+)
+
+FLATPAK_PACKAGES=(flathub one.ablaze.floorp com.discordapp.Discord
+    org.telegram.desktop com.bambulab.BambuStudio)
+
 # Functions source
 for f in $(find "$FUNCTIONS_DIR" -type f -name "*.sh"); do
   source "$f"
@@ -29,19 +37,13 @@ gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 configure_dnf
 
 # Update the system.
-echo "Updating the system..."
-sudo dnf upgrade --refresh -y
+spinner "Updating the system " "sudo dnf upgrade --refresh -y"
 
 # Install rpm packages.
-echo "Installing RPM packages..."
-sudo dnf install -y git vim curl wget fastfetch htop fish \
-    steam terminator ansible gnome-tweaks gnome-extensions-app \
-    gnome-shell-extension-appindicator hydrapaper
+spinner "Installing RPM packages " "sudo dnf install -y ${RPM_PACKAGES[*]}"
 
 # Install Flatpaks packages
-echo "Installing Flatpack packages..."
-flatpak install -y flathub one.ablaze.floorp com.discordapp.Discord \
-    org.telegram.desktop com.bambulab.BambuStudio
+spinner "Installing Flatpack packages " "flatpak install -y ${FLATPAK_PACKAGES[*]}"
 
 # Install Docker
 install_docker
