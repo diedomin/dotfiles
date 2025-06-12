@@ -91,8 +91,9 @@ fc-cache -fv
 echo "Installing Starship..."
 curl -sS https://starship.rs/install.sh | sh -s -- -y
 mkdir -p ~/.config
+mkdir -p ~/.config/fish
 cp ~/dotfiles/starship/starship.toml ~/.config/starship.toml
-chmod 600 ~/.config/fish/config.fish ~/.config/starship.toml
+chmod 600 ~/.config/starship.toml
 
 # Configure fish shell
 echo "Configuring fish..."
