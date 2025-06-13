@@ -1,7 +1,7 @@
 spinner() {
     local msg="$1"
     local cmd="$2"
-    local logfile="$HOME/Proyectos/Github/dotfiles/setup_$(date +%s%N).log"
+    local logfile="$HOME/dotfiles/setup_$(date +%s%N).log"
     local spins=('⠋' '⠙' '⠹' '⠸' '⠼' '⠴' '⠦' '⠧' '⠇' '⠏')
     local i=0
     local green="\033[0;32m"
