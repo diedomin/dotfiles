@@ -1,7 +1,8 @@
 #!/bin/bash
 
 install_opentofu() {
-  TOFU_VERSION="${1:-1.9.1}"
+  # Version is optional: without it, the latest release is installed
+  local TOFU_VERSION="${1#v}"
 
   # Add Tofu repo
   sudo tee /etc/yum.repos.d/opentofu.repo > /dev/null <<EOF
@@ -31,11 +32,15 @@ metadata_expire=300
 EOF
 
   # Install OpenTofu
-  sudo dnf install -y tofu
+  if [ -n "$TOFU_VERSION" ]; then
+    sudo dnf install -y "tofu-${TOFU_VERSION}"
+  else
+    sudo dnf install -y tofu
+  fi
 
   # Check install
   if tofu version 2>/dev/null | grep -q "$TOFU_VERSION"; then
-    echo "OpenTofu $TOFU_VERSION OK."
+    echo "$(tofu version | head -n 1) OK."
   else
     echo "❌ Error: OpenTofu instalation fail."
     exit 1
