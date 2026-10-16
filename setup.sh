@@ -13,15 +13,24 @@ FUNCTIONS_DIR="./functions"
 TERRAGRUNT_VERSION=""
 TOFU_VERSION=""
 NERDFONTS="Cousine MartianMono Mononoki RobotoMono"
-NERDFONTS_VERSION=$(curl -s https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest | jq -r .tag_name)
 
-RPM_PACKAGES=(git vim curl wget fastfetch htop steam
+RPM_PACKAGES=(git vim curl wget unzip fastfetch htop btop steam
    terminator ansible gnome-tweaks gnome-extensions-app
-   gnome-shell-extension-appindicator
+   gnome-shell-extension-appindicator chromium
+   # CLI utilities
+   jq yq ripgrep fd-find fzf bat eza gh pre-commit
+   # Kubernetes & containers
+   k9s kustomize skopeo
+   # Secrets
+   age
+   # Cloud providers
+   awscli2 hcloud
+   # Network & diagnostics
+   nmap mtr bind-utils tcpdump httpie openssl wireshark
 )
 
-FLATPAK_PACKAGES=(flathub one.ablaze.floorp com.discordapp.Discord
-    org.telegram.desktop com.bambulab.BambuStudio)
+FLATPAK_PACKAGES=(flathub app.zen_browser.zen io.gitlab.librewolf-community
+    com.discordapp.Discord org.telegram.desktop com.bambulab.BambuStudio)
 
 # Functions source
 for f in $(find "$FUNCTIONS_DIR" -type f -name "*.sh"); do
@@ -58,6 +67,19 @@ spinner "Instaling Minikube... " "install_minikube"
 # Install Helm
 spinner "Installing Helm... " "sudo dnf -y install helm"
 
+# Install tools from GitHub releases
+spinner "Installing kubectx... " "install_github_binary ahmetb/kubectx 'kubectx_{tag}_linux_x86_64.tar.gz' kubectx"
+spinner "Installing kubens... " "install_github_binary ahmetb/kubectx 'kubens_{tag}_linux_x86_64.tar.gz' kubens"
+spinner "Installing stern... " "install_github_binary stern/stern 'stern_{version}_linux_amd64.tar.gz' stern"
+spinner "Installing helmfile... " "install_github_binary helmfile/helmfile 'helmfile_{version}_linux_amd64.tar.gz' helmfile"
+spinner "Installing Argo CD CLI... " "install_github_binary argoproj/argo-cd 'argocd-linux-amd64' argocd"
+spinner "Installing sops... " "install_github_binary getsops/sops 'sops-{tag}.linux.amd64' sops"
+spinner "Installing dive... " "install_github_binary wagoodman/dive 'dive_{version}_linux_amd64.tar.gz' dive"
+spinner "Installing lazygit... " "install_github_binary jesseduffield/lazygit 'lazygit_{version}_linux_x86_64.tar.gz' lazygit"
+
+# Install mise
+spinner "Installing mise... " "install_mise"
+
 # Install Lens desktop
 spinner "Installing Lens... " "install_lens"
 
@@ -72,7 +94,7 @@ spinner "Installing Terragrunt... " "install_terragrunt $TERRAGRUNT_VERSION"
 
 # Install Nerd fonts
 spinner "Installing NerdFonts... " "
-
+NERDFONTS_VERSION=\$(github_latest_tag ryanoasis/nerd-fonts) &&
 mkdir -p ~/.local/share/fonts &&
 for font in \$NERDFONTS; do
   wget -O /tmp/\${font}.zip \"https://github.com/ryanoasis/nerd-fonts/releases/download/\$NERDFONTS_VERSION/\${font}.zip\" &&
